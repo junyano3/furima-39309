@@ -1,24 +1,66 @@
 # README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| password           | string | null: false |
+|   fast_name        | string | null: false |
+|   last_name        | string | null: false |
+|   fast_name_kana   | string | null: false |
+|   last_name_kana   | string | null: false |
+|   date of Birth    | string | null: false |
 
-* Ruby version
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :items
+- has_many :comments
+-------------------------------------------------------
 
-* Database creation
+## items テーブル <!-- 商品情報 -->
 
-* Database initialization
+| Column       | Type   | Options     |
+| ------------ | ------ | ----------- |
+| item_image   | string | null: false |
+| item_name    | string | null: false |
+| item_price   | string | null: false |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- has_many :comments
+- has_one  :pay.jp-id
+- belongs_to :user
+-------------------------------------------------------
 
-* Deployment instructions
+## delivery_addresses テーブル　<!-- 配送先住所 -->
 
-* ...
+| Column              | Type       | Options                        |
+| ------              | ---------- | ------------------------------ |
+| delivery_address    | string     | null: false                    | <!-- 住所 -->
+| postal_code         | string     | null: false                    | <!-- 郵便番号 -->
+| city_town           | string     | null: false                    |<!-- 市区町村 --><!-- 都道府県はアクティブハッシュで -->
+| building_name       | string     |                                | <!-- 番地 -->
+| phone_number        | string     | null: false                    |<!-- 電話番号 -->
+
+### Association
+
+- belongs_to :pay.jp-id
+-------------------------------------------------------
+
+## Purchase Record テーブル <!-- 購入記録 -->
+
+| Column       | Type       | Options                        |
+| ------------ | ------     | -----------                    |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :delivery_address
+
