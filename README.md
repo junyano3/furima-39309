@@ -8,9 +8,9 @@
 | nickname           | string | null: false               |
 | email              | string | null: false , unique: true|
 | encrypted_password | string | null: false               |
-|   fast_name        | string | null: false               |
+|   first_name       | string | null: false               |
 |   last_name        | string | null: false               |
-|   fast_name_kana   | string | null: false               |
+|   first_name_kana  | string | null: false               |
 |   last_name_kana   | string | null: false               |
 |   date_of_birth    | date   | null: false               |
 
@@ -18,7 +18,6 @@
 ### Association
 
 - has_many :items
-- has_many :comments
 - has_many :purchase_records
 
 -------------------------------------------------------
@@ -40,7 +39,6 @@
 
 ### Association
 
-- has_many :comments
 - has_one  :purchase_record
 - belongs_to :user
 
@@ -61,7 +59,6 @@
 ### Association
 
 - belongs_to :purchase_record
-- belongs_to :item
 -------------------------------------------------------
 
 ## purchase_records テーブル <!-- 購入記録 -->
