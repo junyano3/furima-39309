@@ -43,26 +43,28 @@
 - has_many :comments
 - has_one  :purchase_record
 - belongs_to :user
+
 -------------------------------------------------------
 
 ## delivery_addresses テーブル　<!-- 配送先住所 -->
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
-| postal_code         | integer    | null: false                    | <!-- 郵便番号 -->
+| postal_code         | string     | null: false                    | <!-- 郵便番号 -->
 | prefecture_id       | integer    | null: false                    | <!-- 都道府県はアクティブハッシュで -->
 | city_town           | string     | null: false                    |<!-- 市区町村 -->
-| building_name       | string     | null: false                    | <!-- 番地 -->
-| building            | string     |                                |<!-- 建物名（任意） -->
-| phone_number        | integer    | null: false                    |<!-- 電話番号 -->
+| street_number       | string     | null: false                    | <!-- 番地 -->
+| building_name       | string     |                                |<!-- 建物名（任意） -->
+| phone_number        | string     | null: false                    |<!-- 電話番号 -->
 | purchase_record     | references | null: false, foreign_key: true |<!-- 購入者、購入したもののid -->
 
 ### Association
 
-- belongs_to :purchase_Record
+- belongs_to :purchase_record
+- belongs_to :item
 -------------------------------------------------------
 
-## purchase_record テーブル <!-- 購入記録 -->
+## purchase_records テーブル <!-- 購入記録 -->
 
 | Column                 | Type       | Options                        |
 | ---------------------- | ---------- | ------------------------------ |
