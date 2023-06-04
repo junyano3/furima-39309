@@ -14,7 +14,7 @@ class Item < ApplicationRecord
  validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
  validates :shipping_duration_id, numericality: { other_than: 1 , message: "can't be blank"}
 
- validates :item_price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 99999999, message: "は¥300から¥9,999,999の範囲内で入力してください" }, format: { with: /\A[0-9]+\z/, message: "は半角数字で入力してください" }
+ validates :item_price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は¥300から¥9,999,999の範囲内で入力してください" }, format: { with: /\A[0-9]+\z/, message: "は半角数字で入力してください" }
  belongs_to :user
  has_one_attached :image
 end
