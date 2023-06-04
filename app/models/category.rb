@@ -1,5 +1,4 @@
 class Category < ActiveHash::Base
-
   self.data = [
     { id: 1, name: '---' },
     { id: 2, name: 'メンズ' },
@@ -13,8 +12,8 @@ class Category < ActiveHash::Base
     { id: 10, name: '音楽' },
     { id: 11, name: 'ゲーム' },
     { id: 12, name: 'おもちゃ' }
-  
+
   ]
-    include ActiveHash::Associations
-    has_many :items
+  include ActiveHash::Associations
+  has_many :items
 end
