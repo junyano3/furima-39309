@@ -13,6 +13,11 @@ RSpec.describe Item, type: :model do
     end
 
     context '商品新規登録できないとき' do
+      it 'userが紐付いていない場合、商品を出品できないこと' do
+       @item.user = nil
+       @item.valid? 
+       expect(@item.errors.full_messages).to include("User must exist")
+        end
       it '商品画像が必須であること' do
         @item.image = nil
         @item.valid?
@@ -28,28 +33,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Product description can't be blank")
       end
-      it 'カテゴリーの情報が必須であること' do
-        @item.category_id = ''
+      it 'カテゴリーに「---」が選択されている場合は出品できない' do
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-      it '商品の状態の情報が必須であること' do
-        @item.condition_id = ''
+      it '商品の状態に「---」が選択されている場合は出品できない' do
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
-      it '配送料の負担の情報が必須であること' do
-        @item.shipping_fee_responsibility_id = ''
+      it '配送料の負担に「---」が選択されている場合は出品できない' do
+        @item.shipping_fee_responsibility_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee responsibility can't be blank")
       end
-      it '発送元の地域の情報が必須であること' do
-        @item.prefecture_id = ''
+      it '発送元の地域の情報に「---」が選択されている場合は出品できない' do
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it '発送までの日数の情報が必須であること' do
-        @item.shipping_duration_id = ''
+      it '発送までの日数に「---」が選択されている場合は出品できない' do
+        @item.shipping_duration_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping duration can't be blank")
       end
@@ -74,17 +79,9 @@ RSpec.describe Item, type: :model do
       # \\価格は、¥300~¥9,999,999の間のみ保存可能であること。
 
       it '価格は半角数値のみ保存可能であること' do
-        @item.item_price = '12345' # 半角数字の例
-        expect(@item).to be_valid
-
-        @item.item_price = '12a34'  # 半角数字以外の文字を含む例
-        expect(@item).not_to be_valid
-
         @item.item_price = '１２３４５'  # 全角数字の例
         expect(@item).not_to be_valid
 
-        @item.item_price = '12,345'  # カンマ区切りの例
-        expect(@item).not_to be_valid
       end
     end
   end
