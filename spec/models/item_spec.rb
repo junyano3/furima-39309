@@ -14,10 +14,10 @@ RSpec.describe Item, type: :model do
 
     context '商品新規登録できないとき' do
       it 'userが紐付いていない場合、商品を出品できないこと' do
-       @item.user = nil
-       @item.valid? 
-       expect(@item.errors.full_messages).to include("User must exist")
-        end
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
       it '商品画像が必須であること' do
         @item.image = nil
         @item.valid?
@@ -81,8 +81,7 @@ RSpec.describe Item, type: :model do
       it '価格は半角数値のみ保存可能であること' do
         @item.item_price = '１２３４５'  # 全角数字の例
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price は¥300から¥9,999,999の範囲内で入力してください")
-        
+        expect(@item.errors.full_messages).to include('Item price は¥300から¥9,999,999の範囲内で入力してください')
       end
     end
   end
