@@ -80,8 +80,9 @@ RSpec.describe Item, type: :model do
 
       it '価格は半角数値のみ保存可能であること' do
         @item.item_price = '１２３４５'  # 全角数字の例
-        expect(@item).not_to be_valid
-
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item price は¥300から¥9,999,999の範囲内で入力してください")
+        
       end
     end
   end
