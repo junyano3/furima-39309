@@ -18,6 +18,7 @@ class ItemsController < ApplicationController
     end
   end
 
+
   def show
   end
 
@@ -34,6 +35,7 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+
   end
 
   private
