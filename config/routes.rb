@@ -6,4 +6,6 @@ resources :users, only: [:edit, :update,:destroy]
 
 resources :items
 
+resources :orders, only: [:index, :new, :create]
+
 end
