@@ -30,8 +30,9 @@ def item_set
   @item = Item.find(params[:item_id])
 end
 
+
 def user_check
-  if current_user.id == @item.user_id
+  if current_user.id == @item.user_id || @item.sold?
   redirect_to root_path
   end
 end
