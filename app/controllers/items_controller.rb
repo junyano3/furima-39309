@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit,:destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :buy_check, only: [:edit, :update, :destroy]
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -54,5 +55,11 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def buy_check
+    return unless PurchaseRecord.exists?(item_id: @item.id)
+
+    redirect_to root_path
   end
 end
