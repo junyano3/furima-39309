@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
   end
 
   def user_check
-    return unless current_user.id == @item.user_id || @item.sold?
+    return unless current_user.id == @item.user_id || PurchaseRecord.exists?(item_id: @item.id)
 
     redirect_to root_path
   end

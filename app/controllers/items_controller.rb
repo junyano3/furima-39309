@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
   end
 
   def buy_check
-    return unless @item.sold?
+    return unless PurchaseRecord.exists?(item_id: @item.id)
 
     redirect_to root_path
   end
