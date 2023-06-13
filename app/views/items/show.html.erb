@@ -8,7 +8,7 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image,class:"item-box-img" %>
-      <% if @item.sold? %>
+     <% if PurchaseRecord.exists?(item_id: @item.id) %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       <%end%>
@@ -23,7 +23,7 @@
       </span>
     </div>
 
- <% if @item.sold? %>
+ <% if PurchaseRecord.exists?(item_id: @item.id) %>
 
  <% elsif user_signed_in? && current_user.id == @item.user_id %>
 

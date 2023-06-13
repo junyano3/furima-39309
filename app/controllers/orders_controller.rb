@@ -6,10 +6,6 @@ class OrdersController < ApplicationController
     @purchase_record_delivery_address = PurchaseRecordDeliveryAddress.new
   end
 
-  def new
-    @purchase_record_delivery_address = PurchaseRecordDeliveryAddress.new
-  end
-
   def create
     @purchase_record_delivery_address = PurchaseRecordDeliveryAddress.new(order_params)
 
